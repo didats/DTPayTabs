@@ -1,3 +1,5 @@
+[![Rimbunesia](http://rimbunesia.com/images/github-rimbunesia.png)](http://rimbunesia.com)
+
 # DTPayTabs
 The class you will need to connect with Paytabs API ([https://www.paytabs.com/](https://www.paytabs.com/))  
 
