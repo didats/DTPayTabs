@@ -42,8 +42,6 @@ class DTPayTabs {
       // error message when creating payment page
       $this->responsePayment = array("Your payment has rejected", "Your payment has prepared", "PIN rejected, payment rejected", "PIN accepted, payment approved", "Payment is completed. 3D secure is also approved (if applicable)", "Unknown status", 10 => "Pay Page is created. User must go to the page to complete the payment.");
 
-      // error message when verify the payment
-      $this->responseVerify = array("The payment is rejected", 2=> "PIN Rejected", 6=> "Payment is completed. 3D secure is also approved (if applicable)", "Unknown Status");
    }
 
    /*
@@ -95,13 +93,8 @@ class DTPayTabs {
    function Verify($paymentReference) {
       $curlResult = $this->curl->post($this->baseURL . "verify_payment", array('payment_reference' => $paymentReference, 'api_key' => $this->apiKey));
       $data = json_decode($curlResult->body);
-
-      if(!isset($data->error_code)) {
-         return array('error' => 0, 'message' => $data->result);
-      }
-      else {
-         return array('error' => 1, 'message' => $this->responseVerify[$data->response]);
-      }
+      
+      return array('error' => (!isset($data->error_code)) ? 0 : 1, 'message' => $data->result);
    }
 
 }
